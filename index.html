@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Habit Tracker</h1>
+      <button id="biometric-login">🔒 Login with Biometrics</button>
+    </header>
+
+    <main>
+      <section id="habit-form">
+        <input type="text" id="habit-name" placeholder="Enter Habit Name" />
+        <button id="add-habit">Add Habit</button>
+      </section>
+
+      <section id="habit-list">
+        <h2>Your Habits</h2>
+        <ul id="habits"></ul>
+      </section>
+    </main>
+
+    <div id="chatbot-container">
+      <button id="open-chatbot">💬 Chat with AI</button>
+      <div id="chatbot-box"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="firebase.js"></script>
+    <script src="biometric.js"></script>
+    <script src="chatbot.js"></script>
+  </body>
+</html>

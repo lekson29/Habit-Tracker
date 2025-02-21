@@ -59,16 +59,20 @@ function removeHabitFromStorage(name) {
   localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-// Dark Mode Toggle
-document.getElementById("toggle-dark-mode").addEventListener("click", () => {
+const toggleDarkMode = () => {
   document.body.classList.toggle("dark-mode");
   localStorage.setItem(
-    "dark-mode",
+    "darkMode",
     document.body.classList.contains("dark-mode")
   );
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
 });
 
-// Load Dark Mode Preference
-if (JSON.parse(localStorage.getItem("dark-mode"))) {
-  document.body.classList.add("dark-mode");
-}
+document
+  .getElementById("darkModeBtn")
+  .addEventListener("click", toggleDarkMode);

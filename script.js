@@ -23,11 +23,11 @@ function addHabit(name) {
   let li = document.createElement("li");
 
   li.innerHTML = `
-        <span>${name}</span>
-        <input type="checkbox" class="habit-checkbox" onchange="markHabit('${name}', this)">
-        <span class="habit-stats">🔥 Streak: 0 | ✅ 0/0</span>
-        <button onclick="removeHabitFromFirebase('${name}')">❌</button>
-      `;
+      <span>${name}</span>
+      <input type="checkbox" class="habit-checkbox" onchange="markHabit('${name}', this)">
+      <span class="habit-stats">🔥 Streak: 0 | ✅ 0/0</span>
+      <button onclick="removeHabitFromFirebase('${name}')">❌</button>
+    `;
   habitList.appendChild(li);
 
   li.style.opacity = 0;

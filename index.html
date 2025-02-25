@@ -9,41 +9,47 @@
   <body>
     <header>
       <h1>Habit Tracker</h1>
-      <button id="biometric-login">🔒 Login with Biometrics</button>
-      <button id="toggle-dark-mode">🌙 Dark Mode</button>
+      <div>
+        <button id="biometric-login">🔒 Login with Biometrics</button>
+        <button id="toggle-dark-mode">🌙 Dark Mode</button>
+      </div>
     </header>
 
     <main>
-      <section id="habit-form">
-        <input type="text" id="habit-name" placeholder="Enter Habit Name" />
-        <button id="add-habit">Add Habit</button>
+      <section id="login-form">
+        <h2>Sign In</h2>
+        <input type="email" id="email" placeholder="Enter your email" />
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+        />
+        <button id="sign-in">Sign In</button>
+        <button id="sign-out" style="display: none">Sign Out</button>
+        <p id="user-info"></p>
       </section>
 
-      <section id="habit-list">
-        <h2>Your Habits</h2>
-        <ul id="habits"></ul>
+      <section id="habit-section" style="display: none">
+        <section id="habit-form">
+          <input type="text" id="habit-name" placeholder="Enter Habit Name" />
+          <button id="add-habit">Add Habit</button>
+        </section>
+
+        <section id="habit-list">
+          <h2>Your Habits</h2>
+          <ul id="habits"></ul>
+        </section>
       </section>
+
+      <div id="chatbot-container">
+        <button id="open-chatbot">💬 Chat with AI</button>
+        <div id="chatbot-box"></div>
+      </div>
     </main>
 
-    <div id="chatbot-container">
-      <button id="open-chatbot">💬 Chat with AI</button>
-      <div id="chatbot-box"></div>
-    </div>
-
-    <!-- Login Form -->
-    <section id="login-form">
-      <h2>Sign In</h2>
-      <input type="email" id="email" placeholder="Enter your email" />
-      <input type="password" id="password" placeholder="Enter your password" />
-      <button id="sign-in">Sign In</button>
-      <button id="sign-out" style="display: none">Sign Out</button>
-      <p id="user-info"></p>
-    </section>
-
-    <section id="habit-list">
-      <h2>Your Habits</h2>
-      <ul id="habits"></ul>
-    </section>
+    <footer>
+      <p>&copy; 2025 Habit Tracker. All Rights Reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
     <script src="firebase.js"></script>

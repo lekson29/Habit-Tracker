@@ -13,25 +13,26 @@ body {
     align-items: center;
     padding: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    height: 100%;
 }
 
 header {
     background-color: #5c6bc0;
     color: white;
-    padding: 10px 0;
+    padding: 15px 0;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
     font-size: 2rem;
+    margin-left: 20px;
 }
 
-button {
+header button {
     background-color: #4caf50;
     color: white;
     padding: 8px 16px;
@@ -39,14 +40,23 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-right: 20px;
 }
 
-button:hover {
+header button:hover {
     background-color: #388e3c;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 40px;
+    text-align: center;
 }
 
 #habit-form {
     display: flex;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -65,7 +75,7 @@ button:hover {
 
 #habit-list {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 ul {
@@ -100,11 +110,6 @@ li:hover {
     color: white;
 }
 
-
-.dark-mode li {
-    background-color: #444;
-}
-
 .dark-mode header {
     background-color: #333;
 }
@@ -115,4 +120,16 @@ li:hover {
 
 .dark-mode button:hover {
     background-color: #777;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    background-color: #5c6bc0;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
 }

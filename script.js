@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  loadHabits();
-  checkLoginStatus(); // Check login status on page load
+  checkLoginStatus(); // Ensure login status is checked as soon as the page loads
   setupDarkMode();
   setupEventListeners();
 });
 
 document.getElementById("add-habit").addEventListener("click", () => {
+  if (!isUserLoggedIn()) {
+    alert("You must sign in first to add a habit!");
+    return; // Prevent habit addition if not logged in
+  }
+
   const habitName = document.getElementById("habit-name").value.trim();
   if (habitName) {
     addHabit(habitName);
@@ -48,6 +52,12 @@ function removeHabit(button, name) {
 }
 
 function markHabit(name, checkbox) {
+  if (!isUserLoggedIn()) {
+    alert("You must sign in first to mark a habit!");
+    checkbox.checked = false; // Prevent marking the habit if not logged in
+    return;
+  }
+
   let habitData = JSON.parse(localStorage.getItem(name)) || {
     streak: 0,
     completedDays: 0,
@@ -116,13 +126,13 @@ document.getElementById("sign-out").addEventListener("click", () => {
 function checkLoginStatus() {
   const userEmail = localStorage.getItem("userEmail");
 
-  // Show sign-in form and hide habit section by default on page load
+  // Show the login form and hide habit sections by default
   document.getElementById("login-form").style.display = "block";
   document.getElementById("habit-section").style.display = "none";
   document.getElementById("habit-list").style.display = "none";
 
-  // If the user is logged in, hide sign-in form and show habit section
   if (userEmail) {
+    // User is logged in, show habit section
     document.getElementById("login-form").style.display = "none";
     document.getElementById("habit-section").style.display = "block";
     document.getElementById("habit-list").style.display = "block";
@@ -131,10 +141,15 @@ function checkLoginStatus() {
     ).textContent = `Logged in as: ${userEmail}`;
     document.getElementById("sign-out").style.display = "inline-block";
     document.getElementById("sign-in").style.display = "none";
+    loadHabits(); // Load habits if logged in
   } else {
     document.getElementById("sign-out").style.display = "none";
     document.getElementById("sign-in").style.display = "inline-block";
   }
+}
+
+function isUserLoggedIn() {
+  return localStorage.getItem("userEmail") !== null;
 }
 
 function setupDarkMode() {

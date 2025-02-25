@@ -1,12 +1,10 @@
-// Wait for the DOM content to load before executing any script
 document.addEventListener("DOMContentLoaded", () => {
   loadHabits();
-  checkLoginStatus();
+  checkLoginStatus(); // Check login status on page load
   setupDarkMode();
   setupEventListeners();
 });
 
-// Add Habit
 document.getElementById("add-habit").addEventListener("click", () => {
   const habitName = document.getElementById("habit-name").value.trim();
   if (habitName) {
@@ -16,12 +14,10 @@ document.getElementById("add-habit").addEventListener("click", () => {
   }
 });
 
-// Add habit to the list
 function addHabit(name) {
   const habitList = document.getElementById("habits");
   let li = document.createElement("li");
 
-  // Retrieve or initialize habit data from Local Storage
   let storedData = JSON.parse(localStorage.getItem(name)) || {
     streak: 0,
     completedDays: 0,
@@ -36,12 +32,10 @@ function addHabit(name) {
     `;
   habitList.appendChild(li);
 
-  // Smooth transition for newly added habit
   li.style.opacity = 0;
   setTimeout(() => (li.style.opacity = 1), 200);
 }
 
-// Remove Habit
 function removeHabit(button, name) {
   const habitItem = button.parentElement;
   habitItem.style.transform = "scale(0.9)";
@@ -53,7 +47,6 @@ function removeHabit(button, name) {
   }, 300);
 }
 
-// Mark Habit as Completed for the Day
 function markHabit(name, checkbox) {
   let habitData = JSON.parse(localStorage.getItem(name)) || {
     streak: 0,
@@ -65,7 +58,7 @@ function markHabit(name, checkbox) {
     habitData.completedDays++;
     habitData.streak++;
   } else {
-    habitData.streak = 0; // Reset streak if unchecked
+    habitData.streak = 0;
   }
 
   habitData.totalDays++;
@@ -74,7 +67,6 @@ function markHabit(name, checkbox) {
   updateHabitStats(name);
 }
 
-// Update Habit Stats
 function updateHabitStats(name) {
   let habitList = document.getElementById("habits").children;
   for (let li of habitList) {
@@ -91,7 +83,6 @@ function updateHabitStats(name) {
   }
 }
 
-// Local Storage Functions
 function saveHabit(name) {
   let habits = JSON.parse(localStorage.getItem("habits")) || [];
   habits.push(name);
@@ -109,7 +100,6 @@ function removeHabitFromStorage(name) {
   localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-// Handle Login Status
 document.getElementById("sign-in").addEventListener("click", () => {
   const email = document.getElementById("email").value;
   if (email) {
@@ -125,6 +115,13 @@ document.getElementById("sign-out").addEventListener("click", () => {
 
 function checkLoginStatus() {
   const userEmail = localStorage.getItem("userEmail");
+
+  // Show sign-in form and hide habit section by default on page load
+  document.getElementById("login-form").style.display = "block";
+  document.getElementById("habit-section").style.display = "none";
+  document.getElementById("habit-list").style.display = "none";
+
+  // If the user is logged in, hide sign-in form and show habit section
   if (userEmail) {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("habit-section").style.display = "block";
@@ -135,15 +132,11 @@ function checkLoginStatus() {
     document.getElementById("sign-out").style.display = "inline-block";
     document.getElementById("sign-in").style.display = "none";
   } else {
-    document.getElementById("login-form").style.display = "block";
-    document.getElementById("habit-section").style.display = "none";
-    document.getElementById("habit-list").style.display = "none";
     document.getElementById("sign-out").style.display = "none";
     document.getElementById("sign-in").style.display = "inline-block";
   }
 }
 
-// Handle Dark Mode Toggle
 function setupDarkMode() {
   if (localStorage.getItem("darkMode") === "true") {
     document.body.classList.add("dark-mode");
@@ -158,7 +151,6 @@ document.getElementById("toggle-dark-mode").addEventListener("click", () => {
   );
 });
 
-// Chatbot Toggle Functionality
 document.getElementById("open-chatbot").addEventListener("click", () => {
   const chatbotBox = document.getElementById("chatbot-box");
   chatbotBox.style.display =

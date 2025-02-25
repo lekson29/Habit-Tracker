@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (openChatbotBtn && chatbotBox) {
     openChatbotBtn.addEventListener("click", () => {
-      chatbotBox.innerHTML = "Hello! Need help with your habits?";
+      chatbotBox.innerHTML =
+        "Hello! How can I assist you with your habits today?";
+      chatbotBox.style.display = "block";
     });
   } else {
     console.error("Chatbot elements not found!");

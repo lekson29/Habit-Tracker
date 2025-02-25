@@ -3,17 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Habit Tracker - Login</title>
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h2>Login to Habit Tracker</h2>
-    <input type="email" id="email" placeholder="Enter Email" />
-    <input type="password" id="password" placeholder="Enter Password" />
-    <button id="register-btn">Register</button>
-    <button id="login-btn">Login</button>
-    <button id="google-login-btn">Login with Google</button>
-    <button id="biometric-login-btn">Biometric Login</button>
-    <button id="logout-btn">Logout</button>
+    <div class="container">
+      <h1>Habit Tracker</h1>
+
+      <!-- Sign In Button -->
+      <button id="signInButton">Sign in with Google</button>
+
+      <!-- Habit Add Form -->
+      <input type="text" id="habitName" placeholder="Enter a habit" />
+      <button id="addHabitButton">Add Habit</button>
+
+      <!-- Habit List -->
+      <div id="habitList"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
 
     <script src="script.js"></script>
   </body>

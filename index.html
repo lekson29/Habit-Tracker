@@ -12,6 +12,16 @@
       <button id="toggle-dark-mode">🌙 Dark Mode</button>
     </header>
 
+    <!-- Login Form -->
+    <section id="login-form">
+      <h2>Sign In</h2>
+      <input type="email" id="email" placeholder="Enter your email" />
+      <input type="password" id="password" placeholder="Enter your password" />
+      <button id="sign-in">Sign In</button>
+      <button id="sign-out" style="display: none">Sign Out</button>
+      <p id="user-info"></p>
+    </section>
+
     <main>
       <!-- Login Form -->
       <section id="login-form">
@@ -45,6 +55,25 @@
       <button id="open-chatbot">💬 Chat with AI</button>
       <div id="chatbot-box"></div>
     </div>
+    <footer
+      style="
+        background-color: #222;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      "
+    >
+      <p>&copy; 2025 Lekan Owonikoko. All rights reserved.</p>
+      <p>
+        <a href="/privacy-policy" style="color: #bbb; text-decoration: none"
+          >Privacy Policy</a
+        >
+        |
+        <a href="/terms-of-service" style="color: #bbb; text-decoration: none"
+          >Terms of Service</a
+        >
+      </p>
+    </footer>
 
     <script src="script.js"></script>
     <script src="firebase.js"></script>

@@ -76,6 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Login System
+document.addEventListener("DOMContentLoaded", () => {
+  loadHabits();
+  checkLoginStatus();
+});
+
+// Login System
 document.getElementById("sign-in").addEventListener("click", () => {
   const email = document.getElementById("email").value;
   if (email) {
@@ -95,5 +101,9 @@ function checkLoginStatus() {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("habit-form").style.display = "block";
     document.getElementById("habit-list").style.display = "block";
+  } else {
+    document.getElementById("login-form").style.display = "block";
+    document.getElementById("habit-form").style.display = "none";
+    document.getElementById("habit-list").style.display = "none";
   }
 }

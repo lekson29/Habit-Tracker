@@ -1,86 +1,81 @@
 import {
   signIn,
-  logOut,
+  signUp,
+  signOutUser,
+  checkLoginStatus,
   addHabitToFirebase,
   loadHabits,
-  removeHabitFromFirebase,
 } from "./firebase.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  setupEventListeners();
-});
+// DOM elements
+const signInBtn = document.getElementById("sign-in-btn");
+const signUpBtn = document.getElementById("sign-up-btn");
+const signOutBtn = document.getElementById("logout-btn");
+const addHabitBtn = document.getElementById("add-habit-btn");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const habitNameInput = document.getElementById("habit-name");
 
-function setupEventListeners() {
-  document.getElementById("sign-in").addEventListener("click", signInHandler);
-  document.getElementById("sign-out").addEventListener("click", signOutHandler);
-  document
-    .getElementById("add-habit")
-    .addEventListener("click", addHabitHandler);
-  document
-    .getElementById("toggle-dark-mode")
-    .addEventListener("click", toggleDarkMode);
-}
+// Event Listeners
+signInBtn.addEventListener("click", signInHandler);
+signUpBtn.addEventListener("click", signUpHandler);
+signOutBtn.addEventListener("click", signOutHandler);
+addHabitBtn.addEventListener("click", addHabitHandler);
 
+// Sign in handler
 async function signInHandler() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
   if (email && password) {
-    await signIn(email, password);
-    checkLoginStatus(); // Check if the user is signed in after the attempt
-  } else {
-    alert("Please enter email and password!");
+    const user = await signIn(email, password);
+    if (user) {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("habit-section").style.display = "block";
+      loadHabits();
+    }
   }
 }
 
-async function signOutHandler() {
-  await logOut();
-  checkLoginStatus(); // Check the login status after logging out
+// Sign up handler
+async function signUpHandler() {
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  if (email && password) {
+    const user = await signUp(email, password);
+    if (user) {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("habit-section").style.display = "block";
+      loadHabits();
+    }
+  }
 }
 
+// Sign out handler
+async function signOutHandler() {
+  await signOutUser();
+  document.getElementById("login-form").style.display = "block";
+  document.getElementById("habit-section").style.display = "none";
+}
+
+// Add habit handler
 async function addHabitHandler() {
-  const habitName = document.getElementById("habit-name").value.trim();
+  const habitName = habitNameInput.value;
   if (habitName) {
     await addHabitToFirebase(habitName);
-    loadHabitsUI(); // Reload the habits after adding
+    habitNameInput.value = ""; // Clear input
   }
 }
 
-async function loadHabitsUI() {
-  const habits = await loadHabits();
-  document.getElementById("habits").innerHTML = "";
-  habits.forEach((habit) => {
-    let li = document.createElement("li");
-    li.innerHTML = `
-      <span>${habit.name}</span>
-      <button onclick="removeHabitFromFirebase('${habit.id}')">❌</button>
-    `;
-    document.getElementById("habits").appendChild(li);
-  });
-}
-
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem(
-    "darkMode",
-    document.body.classList.contains("dark-mode")
-  );
-}
-
-function checkLoginStatus() {
-  const user = firebase.auth().currentUser;
-
+// Check if the user is logged in when the page loads
+checkLoginStatus((user) => {
   if (user) {
-    // Show habit tracker, hide login form
     document.getElementById("login-form").style.display = "none";
     document.getElementById("habit-section").style.display = "block";
-    loadHabitsUI(); // Load habits if logged in
+    loadHabits();
   } else {
-    // Show login form, hide habit tracker
     document.getElementById("login-form").style.display = "block";
     document.getElementById("habit-section").style.display = "none";
   }
-}
-
-// Initialize the login status check
-checkLoginStatus();
+});

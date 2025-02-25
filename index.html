@@ -4,40 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
-    <link rel="stylesheet" href="styles.css" />
+    <script src="firebase.js" type="module"></script>
   </head>
   <body>
     <!-- Login Section -->
     <div id="login-form">
-      <h2>Sign In</h2>
-      <input type="email" id="email" placeholder="Enter your email" />
-      <input type="password" id="password" placeholder="Enter your password" />
-      <button id="sign-in">Sign In</button>
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="sign-in-btn">Sign In</button>
+      <button id="sign-up-btn">Sign Up</button>
     </div>
 
     <!-- Habit Tracker Section -->
     <div id="habit-section" style="display: none">
-      <header>
-        <h1>Habit Tracker</h1>
-        <button id="sign-out">Sign Out</button>
-      </header>
-
-      <main>
-        <h2>Add a New Habit</h2>
-        <input type="text" id="habit-name" placeholder="Habit name" />
-        <button id="add-habit">Add Habit</button>
-
-        <h3>Your Habits</h3>
-        <ul id="habits"></ul>
-
-        <button id="toggle-dark-mode">Toggle Dark Mode</button>
-      </main>
-
-      <footer>
-        <p>&copy; 2025 Habit Tracker</p>
-      </footer>
+      <h2>Habit Tracker</h2>
+      <ul id="habits"></ul>
+      <input type="text" id="habit-name" placeholder="New Habit" />
+      <button id="add-habit-btn">Add Habit</button>
+      <button id="logout-btn">Logout</button>
     </div>
-
-    <script type="module" src="script.js"></script>
   </body>
+  <script type="module" src="script.js"></script>
+  <script src="firebase.js"></script>
 </html>

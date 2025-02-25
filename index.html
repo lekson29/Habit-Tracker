@@ -4,67 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
+    <div class="container">
       <h1>Habit Tracker</h1>
-      <button id="toggle-dark-mode">🌙 Dark Mode</button>
-    </header>
 
-    <!-- Login Form -->
-    <section id="login-form">
-      <h2>Sign In</h2>
-      <input type="email" id="email" placeholder="Enter your email" />
-      <input type="password" id="password" placeholder="Enter your password" />
-      <button id="sign-in" onclick="signIn()">Sign In with Google</button>
-      <button id="sign-out" style="display: none" onclick="signOut()">
-        Sign Out
-      </button>
-      <p id="user-info"></p>
-    </section>
+      <!-- Google Login Section -->
+      <div id="google-login" class="google-login">
+        <button id="google-sign-in-btn">Sign in with Google</button>
+      </div>
 
-    <main>
-      <!-- Habit Form -->
-      <section id="habit-form" style="display: none">
-        <input type="text" id="habit-name" placeholder="Enter Habit Name" />
-        <button id="add-habit">Add Habit</button>
-      </section>
+      <!-- Habit Tracker Section (hidden until logged in) -->
+      <div id="habit-tracker-section" style="display: none">
+        <button id="add-habit-btn">Add Habit</button>
 
-      <!-- Habit List -->
-      <section id="habit-list" style="display: none">
-        <h2>Your Habits</h2>
-        <ul id="habits"></ul>
-      </section>
-    </main>
+        <div id="habit-list" class="habit-list">
+          <!-- Habit items will be dynamically inserted here -->
+        </div>
 
-    <!-- Chatbot -->
-    <div id="chatbot-container">
-      <button id="open-chatbot">💬 Chat with AI</button>
-      <div id="chatbot-box"></div>
+        <div id="habit-form" class="habit-form">
+          <input
+            type="text"
+            id="habit-name"
+            placeholder="Enter Habit"
+            required
+          />
+          <button id="save-habit-btn">Save Habit</button>
+          <button id="cancel-habit-btn">Cancel</button>
+        </div>
+      </div>
     </div>
-    <footer
-      style="
-        background-color: #222;
-        color: white;
-        text-align: center;
-        padding: 20px;
-      "
-    >
-      <p>&copy; 2025 Lekan Owonikoko. All rights reserved.</p>
-      <p>
-        <a href="/privacy-policy" style="color: #bbb; text-decoration: none"
-          >Privacy Policy</a
-        >
-        |
-        <a href="/terms-of-service" style="color: #bbb; text-decoration: none"
-          >Terms of Service</a
-        >
-      </p>
-    </footer>
 
-    <script src="script.js" type="module"></script>
-
-    <script src="firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

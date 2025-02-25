@@ -20,7 +20,12 @@ document.getElementById("signInButton").addEventListener("click", async () => {
   try {
     const result = await auth.signInWithPopup(provider);
     const user = result.user;
+
+    // Show the habit form after sign-in
+    document.getElementById("habitForm").style.display = "block";
+    document.getElementById("signInButton").style.display = "none"; // Hide sign-in button
     console.log("User signed in:", user.displayName);
+
     loadUserHabits(user.uid); // Load habits after signing in
   } catch (error) {
     console.error("Error signing in:", error.message);

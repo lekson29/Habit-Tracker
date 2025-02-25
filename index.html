@@ -4,27 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
-    <script src="firebase.js" type="module"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <!-- Login Section -->
-    <div id="login-form">
-      <h2>Login</h2>
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button id="sign-in-btn">Sign In</button>
-      <button id="sign-up-btn">Sign Up</button>
+    <div id="login-page">
+      <h2>Welcome to Habit Tracker</h2>
+
+      <div id="email-login">
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          class="input-field"
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          class="input-field"
+        />
+        <button id="login-email" class="btn-primary">Login with Email</button>
+        <button id="register-email" class="btn-secondary">Register</button>
+      </div>
+
+      <button id="biometric-login" class="btn-primary">
+        Login with Biometric
+      </button>
     </div>
 
-    <!-- Habit Tracker Section -->
-    <div id="habit-section" style="display: none">
-      <h2>Habit Tracker</h2>
-      <ul id="habits"></ul>
-      <input type="text" id="habit-name" placeholder="New Habit" />
-      <button id="add-habit-btn">Add Habit</button>
-      <button id="logout-btn">Logout</button>
+    <div id="habit-tracker-page" style="display: none">
+      <h3>Habit Tracker</h3>
+      <div id="habit-form">
+        <input
+          type="text"
+          id="habit-input"
+          placeholder="Enter your habit"
+          class="input-field"
+        />
+        <button id="add-habit-btn" class="btn-primary">Add Habit</button>
+      </div>
+      <ul id="habit-list"></ul>
+      <div id="streak-info"></div>
     </div>
+
+    <div id="chatbot-box" style="display: none"></div>
+
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
+    <script src="chatbox.js"></script>
+    <script src="biometrics.js"></script>
   </body>
-  <script type="module" src="script.js"></script>
-  <script src="firebase.js"></script>
 </html>

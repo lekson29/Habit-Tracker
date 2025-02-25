@@ -4,40 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
       <h1>Habit Tracker</h1>
-
-      <!-- Sign In Button -->
       <button id="signInButton">Sign in with Google</button>
+      <button id="signOutButton" style="display: none">Sign Out</button>
 
-      <!-- Habit Add Form (Initially Hidden) -->
-      <div id="habitForm" style="display: none">
-        <input type="text" id="habitName" placeholder="Enter a habit" />
+      <div id="habitSection" style="display: none">
+        <h2>Add a New Habit</h2>
+        <input type="text" id="habitName" placeholder="Enter habit name" />
         <button id="addHabitButton">Add Habit</button>
+
+        <h2>Your Habits</h2>
+        <div id="habitList"></div>
       </div>
 
-      <!-- Habit List -->
-      <div id="habitList"></div>
+      <div id="chatbox">
+        <h2>Chat</h2>
+        <div id="messages"></div>
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button id="sendChat">Send</button>
+      </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-      import {
-        getAuth,
-        GoogleAuthProvider,
-        signInWithPopup,
-      } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js";
-      import {
-        getFirestore,
-        collection,
-        addDoc,
-      } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
-    </script>
-
+    <script type="module" src="firebase.js"></script>
     <script src="script.js"></script>
+    <script src="chatbox.js"></script>
   </body>
 </html>

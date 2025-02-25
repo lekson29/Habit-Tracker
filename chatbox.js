@@ -1,14 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const openChatbotBtn = document.getElementById("open-chatbot");
-  const chatbotBox = document.getElementById("chatbot-box");
+document.getElementById("sendChat").addEventListener("click", () => {
+  const chatInput = document.getElementById("chatInput").value;
+  const messages = document.getElementById("messages");
 
-  if (openChatbotBtn && chatbotBox) {
-    openChatbotBtn.addEventListener("click", () => {
-      chatbotBox.innerHTML =
-        "Hello! How can I assist you with your habits today?";
-      chatbotBox.style.display = "block";
-    });
-  } else {
-    console.error("Chatbot elements not found!");
+  if (chatInput) {
+    const messageElement = document.createElement("p");
+    messageElement.textContent = chatInput;
+    messages.appendChild(messageElement);
+    document.getElementById("chatInput").value = "";
   }
 });

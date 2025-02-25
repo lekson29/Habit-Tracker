@@ -37,7 +37,7 @@ console.log("Auth instance:", auth);
 console.log("Google Provider:", provider);
 
 // Sign in with Google
-export function signIn() {
+function signIn() {
   signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
@@ -53,7 +53,7 @@ export function signIn() {
 }
 
 // Sign out
-export function signOutUser() {
+function signOutUser() {
   signOut(auth)
     .then(() => {
       console.log("User signed out");
@@ -67,7 +67,7 @@ export function signOutUser() {
 }
 
 // Add habit to Firestore
-export async function addHabit(userId, habitName) {
+async function addHabit(userId, habitName) {
   if (!habitName) {
     console.warn("Habit name is required");
     return;
@@ -88,7 +88,7 @@ export async function addHabit(userId, habitName) {
 }
 
 // Load habits from Firestore
-export async function loadHabits(userId) {
+async function loadHabits(userId) {
   const habitList = document.getElementById("habitList");
   habitList.innerHTML = "";
 
@@ -115,7 +115,7 @@ export async function loadHabits(userId) {
 }
 
 // Mark habit as completed
-export async function markCompleted(habitId, userId) {
+async function markCompleted(habitId, userId) {
   try {
     const habitRef = doc(db, "users", userId, "habits", habitId);
     await updateDoc(habitRef, { completedToday: true });

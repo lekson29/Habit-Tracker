@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   checkLoginStatus(); // Ensure login status is checked as soon as the page loads
   setupDarkMode();
   setupEventListeners();
+  loadHabits(); // Ensure habits are loaded when the page loads
 });
 
 document.getElementById("add-habit").addEventListener("click", () => {
@@ -12,8 +13,7 @@ document.getElementById("add-habit").addEventListener("click", () => {
 
   const habitName = document.getElementById("habit-name").value.trim();
   if (habitName) {
-    addHabit(habitName);
-    saveHabit(habitName);
+    addHabitToFirebase(habitName); // Use Firebase to add habit
     document.getElementById("habit-name").value = ""; // Clear the input
   }
 });
@@ -22,18 +22,12 @@ function addHabit(name) {
   const habitList = document.getElementById("habits");
   let li = document.createElement("li");
 
-  let storedData = JSON.parse(localStorage.getItem(name)) || {
-    streak: 0,
-    completedDays: 0,
-    totalDays: 0,
-  };
-
   li.innerHTML = `
-      <span>${name}</span>
-      <input type="checkbox" class="habit-checkbox" onchange="markHabit('${name}', this)">
-      <span class="habit-stats">🔥 Streak: ${storedData.streak} | ✅ ${storedData.completedDays}/${storedData.totalDays}</span>
-      <button onclick="removeHabit(this, '${name}')">❌</button>
-    `;
+        <span>${name}</span>
+        <input type="checkbox" class="habit-checkbox" onchange="markHabit('${name}', this)">
+        <span class="habit-stats">🔥 Streak: 0 | ✅ 0/0</span>
+        <button onclick="removeHabitFromFirebase('${name}')">❌</button>
+      `;
   habitList.appendChild(li);
 
   li.style.opacity = 0;
@@ -47,7 +41,7 @@ function removeHabit(button, name) {
 
   setTimeout(() => {
     habitItem.remove();
-    removeHabitFromStorage(name);
+    removeHabitFromFirebase(name);
   }, 300);
 }
 
@@ -58,56 +52,11 @@ function markHabit(name, checkbox) {
     return;
   }
 
-  let habitData = JSON.parse(localStorage.getItem(name)) || {
-    streak: 0,
-    completedDays: 0,
-    totalDays: 0,
-  };
-
-  if (checkbox.checked) {
-    habitData.completedDays++;
-    habitData.streak++;
-  } else {
-    habitData.streak = 0;
-  }
-
-  habitData.totalDays++;
-  localStorage.setItem(name, JSON.stringify(habitData));
-
-  updateHabitStats(name);
+  // Logic to update habit stats can be implemented here if you want to track stats in Firebase.
 }
 
-function updateHabitStats(name) {
-  let habitList = document.getElementById("habits").children;
-  for (let li of habitList) {
-    if (li.innerHTML.includes(name)) {
-      let habitData = JSON.parse(localStorage.getItem(name)) || {
-        streak: 0,
-        completedDays: 0,
-        totalDays: 0,
-      };
-      li.querySelector(
-        ".habit-stats"
-      ).innerHTML = `🔥 Streak: ${habitData.streak} | ✅ ${habitData.completedDays}/${habitData.totalDays}`;
-    }
-  }
-}
-
-function saveHabit(name) {
-  let habits = JSON.parse(localStorage.getItem("habits")) || [];
-  habits.push(name);
-  localStorage.setItem("habits", JSON.stringify(habits));
-}
-
-function loadHabits() {
-  let habits = JSON.parse(localStorage.getItem("habits")) || [];
-  habits.forEach(addHabit);
-}
-
-function removeHabitFromStorage(name) {
-  let habits = JSON.parse(localStorage.getItem("habits")) || [];
-  habits = habits.filter((habit) => habit !== name);
-  localStorage.setItem("habits", JSON.stringify(habits));
+function removeHabitFromFirebase(id) {
+  deleteHabit(id);
 }
 
 document.getElementById("sign-in").addEventListener("click", () => {

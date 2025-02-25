@@ -18,9 +18,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Add habit to Firebase
-async function addHabit(name) {
+async function addHabitToFirebase(name) {
   await addDoc(collection(db, "habits"), { name });
-  loadHabits();
+  loadHabits(); // Reload habits after adding
 }
 
 // Load habits from Firebase
@@ -29,18 +29,15 @@ async function loadHabits() {
   document.getElementById("habits").innerHTML = "";
   querySnapshot.forEach((doc) => {
     let li = document.createElement("li");
-    li.innerHTML = `${doc.data().name} <button onclick="removeHabit('${
-      doc.id
-    }')">❌</button>`;
+    li.innerHTML = `${
+      doc.data().name
+    } <button onclick="removeHabitFromFirebase('${doc.id}')">❌</button>`;
     document.getElementById("habits").appendChild(li);
   });
 }
 
 // Remove habit from Firebase
-async function removeHabit(id) {
+async function removeHabitFromFirebase(id) {
   await deleteDoc(doc(db, "habits", id));
-  loadHabits();
+  loadHabits(); // Reload habits after deletion
 }
-
-// Load habits on page load
-loadHabits();

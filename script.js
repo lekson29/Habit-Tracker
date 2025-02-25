@@ -1,13 +1,12 @@
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID",
+  apiKey: "AIzaSyDs6aSlwtmS2bGPMApvaHEGgPyHYdqjNHU",
+  authDomain: "habit-tracker-5eee2.firebaseapp.com",
+  projectId: "habit-tracker-5eee2",
+  storageBucket: "habit-tracker-5eee2.firebasestorage.app",
+  messagingSenderId: "779245589872",
+  appId: "1:779245589872:web:a637c67b623f040219abb5",
+  measurementId: "G-F6HWE82Q53",
 };
 
 // Initialize Firebase

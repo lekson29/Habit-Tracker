@@ -7,65 +7,37 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Habit Tracker</h1>
-      <div>
-        <button id="biometric-login">🔒 Login with Biometrics</button>
-        <button id="toggle-dark-mode">🌙 Dark Mode</button>
-      </div>
-    </header>
+    <!-- Login Section -->
+    <div id="login-form">
+      <h2>Sign In</h2>
+      <input type="email" id="email" placeholder="Enter your email" />
+      <input type="password" id="password" placeholder="Enter your password" />
+      <button id="sign-in">Sign In</button>
+    </div>
 
-    <main>
-      <!-- Login Section (Initially Visible) -->
-      <section id="login-form">
-        <h2>Sign In</h2>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          required
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="Enter your password"
-          required
-        />
-        <button id="sign-in">Sign In</button>
-        <button id="sign-out" style="display: none">Sign Out</button>
-        <p id="user-info"></p>
-      </section>
+    <!-- Habit Tracker Section -->
+    <div id="habit-section" style="display: none">
+      <header>
+        <h1>Habit Tracker</h1>
+        <button id="sign-out">Sign Out</button>
+      </header>
 
-      <!-- Habit Section (Visible After Sign-In) -->
-      <section id="habit-section" style="display: none">
-        <section id="habit-form">
-          <input type="text" id="habit-name" placeholder="Enter Habit Name" />
-          <button id="add-habit">Add Habit</button>
-        </section>
+      <main>
+        <h2>Add a New Habit</h2>
+        <input type="text" id="habit-name" placeholder="Habit name" />
+        <button id="add-habit">Add Habit</button>
 
-        <section id="habit-list">
-          <h2>Your Habits</h2>
-          <ul id="habits"></ul>
-        </section>
-      </section>
+        <h3>Your Habits</h3>
+        <ul id="habits"></ul>
 
-      <!-- Chatbot Section -->
-      <div id="chatbot-container">
-        <button id="open-chatbot">💬 Chat with AI</button>
-        <div id="chatbot-box"></div>
-      </div>
-    </main>
+        <button id="toggle-dark-mode">Toggle Dark Mode</button>
+      </main>
 
-    <!-- Footer Section -->
-    <footer>
-      <p>&copy; 2025 Habit Tracker | All Rights Reserved</p>
-      <p>Made with ❤️ by Lekan Owonikoko</p>
-    </footer>
+      <footer>
+        <p>&copy; 2025 Habit Tracker</p>
+      </footer>
+    </div>
 
-    <!-- External JS Files -->
     <script type="module" src="script.js"></script>
-    <!-- <script src="firebase.js"></script>
-    <script src="biometric.js"></script>
-    <script src="chatbox.js"></script> -->
   </body>
 </html>

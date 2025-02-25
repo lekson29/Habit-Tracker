@@ -1,4 +1,4 @@
-// Your Firebase Configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDs6aSlwtmS2bGPMApvaHEGgPyHYdqjNHU",
   authDomain: "habit-tracker-5eee2.firebaseapp.com",
@@ -11,6 +11,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
-// Initialize Firebase Authentication
 const auth = firebase.auth();
+const db = firebase.firestore();

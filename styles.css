@@ -1,29 +1,43 @@
-/* Add a secondary button style for email login/registration */
-.btn-secondary {
-    background-color: #007bff;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 1rem;
     color: white;
-    padding: 10px 20px;
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Styling for email login form */
-  #email-login {
-    margin-bottom: 20px;
-  }
-  
-  .input-field {
-    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.habit-item {
+    background: white;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
+    margin: 10px auto;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -32,7 +32,7 @@ async function signInHandler() {
     if (user) {
       document.getElementById("login-form").style.display = "none";
       document.getElementById("habit-section").style.display = "block";
-      loadHabits();
+      loadHabits(user.uid); // Pass user.uid to loadHabits
     }
   }
 }
@@ -47,7 +47,7 @@ async function signUpHandler() {
     if (user) {
       document.getElementById("login-form").style.display = "none";
       document.getElementById("habit-section").style.display = "block";
-      loadHabits();
+      loadHabits(user.uid); // Pass user.uid to loadHabits
     }
   }
 }
@@ -63,21 +63,24 @@ async function signOutHandler() {
 async function addHabitHandler() {
   const habitName = habitNameInput.value.trim();
 
-  if (habitName) {
-    try {
-      await addHabitToFirebase(habitName);
-      habitNameInput.value = ""; // Clear input field
-      console.log("Habit added successfully!");
+  // Ensure that the user is logged in before proceeding
+  checkLoginStatus(async (user) => {
+    if (user && habitName) {
+      try {
+        await addHabitToFirebase(habitName, user.uid); // Pass user.uid here
+        habitNameInput.value = ""; // Clear input field
+        console.log("Habit added successfully!");
 
-      // Refresh the habit list immediately
-      loadHabits();
-    } catch (error) {
-      console.error("Error adding habit:", error);
-      alert("There was an issue adding the habit. Please try again.");
+        // Refresh the habit list immediately
+        loadHabits(user.uid); // Make sure to pass user.uid to loadHabits
+      } catch (error) {
+        console.error("Error adding habit:", error);
+        alert("There was an issue adding the habit. Please try again.");
+      }
+    } else {
+      alert("Please enter a habit name or ensure you're logged in.");
     }
-  } else {
-    alert("Please enter a habit name.");
-  }
+  });
 }
 
 // Check if the user is logged in when the page loads

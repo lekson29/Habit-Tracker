@@ -61,12 +61,16 @@ async function signOutHandler() {
 
 // Add habit handler
 async function addHabitHandler() {
-  const habitName = habitNameInput.value;
+  const habitName = habitNameInput.value.trim();
+
   if (habitName) {
     try {
       await addHabitToFirebase(habitName);
-      habitNameInput.value = ""; // Clear input
+      habitNameInput.value = ""; // Clear input field
       console.log("Habit added successfully!");
+
+      // Refresh the habit list immediately
+      loadHabits();
     } catch (error) {
       console.error("Error adding habit:", error);
       alert("There was an issue adding the habit. Please try again.");

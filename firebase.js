@@ -13,6 +13,9 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  query,
+  where,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // Firebase configuration
@@ -78,39 +81,36 @@ export function checkLoginStatus(callback) {
 }
 
 // Add habit to Firebase (with user.uid)
-async function addHabitToFirebase(habitName, userId) {
-  const db = firebase.firestore();
-  await db.collection("habits").add({
+export async function addHabitToFirebase(habitName, userId) {
+  await addDoc(collection(db, "habits"), {
     name: habitName,
     userId: userId, // Store userId with the habit
-    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    createdAt: new Date(),
   });
 }
 
 // Load habits for a specific user (filter by userId)
-async function loadHabits(userId) {
-  const db = firebase.firestore();
-  const snapshot = await db
-    .collection("habits")
-    .where("userId", "==", userId) // Only get habits that belong to this user
-    .get();
-
-  const habits = [];
-  snapshot.forEach((doc) => {
-    habits.push(doc.data());
-  });
-
-  // Display the habits (or update your UI as needed)
-  console.log(habits);
-}
-
-// **Real-time Listener for Habits**
-export function loadHabits() {
+export async function loadHabits(userId, useRealTime = false) {
   const habitsList = document.getElementById("habits");
   habitsList.innerHTML = ""; // Clear list before rendering
 
-  onSnapshot(collection(db, "habits"), (snapshot) => {
-    habitsList.innerHTML = ""; // Clear list before adding new items
+  if (useRealTime) {
+    // Real-time listener for habits
+    const q = query(collection(db, "habits"), where("userId", "==", userId));
+    onSnapshot(q, (snapshot) => {
+      habitsList.innerHTML = ""; // Clear list before adding new items
+      snapshot.forEach((doc) => {
+        let li = document.createElement("li");
+        li.innerHTML = `${
+          doc.data().name
+        } <button onclick="removeHabitFromFirebase('${doc.id}')">❌</button>`;
+        habitsList.appendChild(li);
+      });
+    });
+  } else {
+    // One-time load of habits for a specific user
+    const q = query(collection(db, "habits"), where("userId", "==", userId));
+    const snapshot = await getDocs(q);
     snapshot.forEach((doc) => {
       let li = document.createElement("li");
       li.innerHTML = `${
@@ -118,7 +118,7 @@ export function loadHabits() {
       } <button onclick="removeHabitFromFirebase('${doc.id}')">❌</button>`;
       habitsList.appendChild(li);
     });
-  });
+  }
 }
 
 // Remove habit from Firestore

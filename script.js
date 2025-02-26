@@ -85,7 +85,7 @@ checkLoginStatus((user) => {
   if (user) {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("habit-section").style.display = "block";
-    loadHabits();
+    loadHabits(user.uid); // Pass user.uid to loadHabits
   } else {
     document.getElementById("login-form").style.display = "block";
     document.getElementById("habit-section").style.display = "none";

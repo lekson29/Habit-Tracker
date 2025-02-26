@@ -82,11 +82,22 @@ export function checkLoginStatus(callback) {
 
 // Add habit to Firebase (with user.uid)
 export async function addHabitToFirebase(habitName, userId) {
-  await addDoc(collection(db, "habits"), {
-    name: habitName,
-    userId: userId, // Store userId with the habit
-    createdAt: new Date(),
-  });
+  if (!userId) {
+    console.error("User ID is required to add habit");
+    alert("You need to be logged in to add a habit.");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "habits"), {
+      name: habitName,
+      userId: userId, // Store userId with the habit
+      createdAt: new Date(),
+    });
+    console.log("Habit added successfully!");
+  } catch (error) {
+    console.error("Error adding habit:", error.message);
+  }
 }
 
 // Load habits for a specific user (filter by userId)

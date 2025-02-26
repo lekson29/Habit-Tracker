@@ -138,12 +138,58 @@ export async function loadHabits(userId, useRealTime = false) {
   }
 }
 
-// Remove habit from Firestore
-export async function removeHabitFromFirebase(id) {
+// Remove habit from Firestore with confirmation and UI update
+export async function removeHabitFromFirebase(id, userId) {
+  if (!id) {
+    console.error("Habit ID is required to delete a habit.");
+    return;
+  }
+
+  const confirmation = confirm("Are you sure you want to delete this habit?");
+  if (!confirmation) return; // Cancel deletion if user declines
+
   try {
     await deleteDoc(doc(db, "habits", id));
-    console.log("Habit removed successfully!");
+    console.log(`Habit with ID ${id} removed successfully!`);
+
+    // Refresh habit list after deletion
+    if (userId) {
+      loadHabits(userId, true);
+    }
   } catch (error) {
     console.error("Error removing habit:", error.message);
+    alert("Failed to delete habit. Please try again.");
+  }
+}
+
+// Update button click handling in loadHabits
+export async function loadHabits(userId, useRealTime = false) {
+  const habitsList = document.getElementById("habits");
+  habitsList.innerHTML = ""; // Clear list before rendering
+
+  const q = query(collection(db, "habits"), where("userId", "==", userId));
+
+  if (useRealTime) {
+    onSnapshot(q, (snapshot) => {
+      habitsList.innerHTML = "";
+      snapshot.forEach((doc) => {
+        let li = document.createElement("li");
+        li.innerHTML = `${doc.data().name} 
+            <button onclick="removeHabitFromFirebase('${
+              doc.id
+            }', '${userId}')">❌</button>`;
+        habitsList.appendChild(li);
+      });
+    });
+  } else {
+    const snapshot = await getDocs(q);
+    snapshot.forEach((doc) => {
+      let li = document.createElement("li");
+      li.innerHTML = `${doc.data().name} 
+          <button onclick="removeHabitFromFirebase('${
+            doc.id
+          }', '${userId}')">❌</button>`;
+      habitsList.appendChild(li);
+    });
   }
 }

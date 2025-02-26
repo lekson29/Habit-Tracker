@@ -4,37 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js"></script>
-
-    <!-- Your custom script -->
-    <script defer src="script.js"></script>
-
-    <link rel="stylesheet" href="style.css" />
+    <script src="firebase.js" type="module"></script>
   </head>
   <body>
-    <div id="google-sign-in">
-      <button id="sign-in-btn">Sign in with Google</button>
+    <!-- Login Section -->
+    <div id="login-form">
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="sign-in-btn">Sign In</button>
+      <button id="sign-up-btn">Sign Up</button>
     </div>
 
-    <div id="habit-tracker" style="display: none">
-      <h1>Your Habit Tracker</h1>
-
-      <div id="habit-list"></div>
-
-      <div>
-        <input
-          type="text"
-          id="habit-name"
-          placeholder="Enter your habit name"
-        />
-        <button id="add-habit-btn">Add Habit</button>
-      </div>
-
-      <button id="logout-btn">Log Out</button>
+    <!-- Habit Tracker Section -->
+    <div id="habit-section" style="display: none">
+      <h2>Habit Tracker</h2>
+      <ul id="habits"></ul>
+      <input type="text" id="habit-name" placeholder="New Habit" />
+      <button id="add-habit-btn">Add Habit</button>
+      <button id="logout-btn">Logout</button>
     </div>
   </body>
+  <script type="module" src="script.js"></script>
 </html>

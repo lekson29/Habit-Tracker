@@ -1,20 +1,45 @@
-.google-login {
-    margin-top: 50px;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
   }
   
-  #google-sign-in-btn {
-    background-color: #4285F4;
-    color: white;
-    border: none;
-    padding: 12px 20px;
+  #habit-tracker {
+    margin-top: 20px;
+  }
+  
+  #habit-list {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px;
+    margin: 5px;
     cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    width: 250px;
-    margin: 0 auto;
   }
   
-  #google-sign-in-btn:hover {
-    background-color: #357ae8;
+  input {
+    padding: 5px;
+    margin: 5px;
+  }
+  
+  h1 {
+    color: #4CAF50;
+  }
+  
+  button:hover {
+    background-color: #ddd;
+  }
+  
+  #habit-list .habit-item {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #habit-list .habit-item button {
+    background-color: red;
+    color: white;
   }
   

@@ -4,41 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js"></script>
+
+    <!-- Your custom script -->
+    <script defer src="script.js"></script>
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Habit Tracker</h1>
-
-      <!-- Google Login Section -->
-      <div id="google-login" class="google-login">
-        <button id="google-sign-in-btn">Sign in with Google</button>
-      </div>
-
-      <!-- Habit Tracker Section (hidden until logged in) -->
-      <div id="habit-tracker-section" style="display: none">
-        <button id="add-habit-btn">Add Habit</button>
-
-        <div id="habit-list" class="habit-list">
-          <!-- Habit items will be dynamically inserted here -->
-        </div>
-
-        <div id="habit-form" class="habit-form">
-          <input
-            type="text"
-            id="habit-name"
-            placeholder="Enter Habit"
-            required
-          />
-          <button id="save-habit-btn">Save Habit</button>
-          <button id="cancel-habit-btn">Cancel</button>
-        </div>
-      </div>
+    <div id="google-sign-in">
+      <button id="sign-in-btn">Sign in with Google</button>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
-    <script src="script.js"></script>
+    <div id="habit-tracker" style="display: none">
+      <h1>Your Habit Tracker</h1>
+
+      <div id="habit-list"></div>
+
+      <div>
+        <input
+          type="text"
+          id="habit-name"
+          placeholder="Enter your habit name"
+        />
+        <button id="add-habit-btn">Add Habit</button>
+      </div>
+
+      <button id="logout-btn">Log Out</button>
+    </div>
   </body>
 </html>

@@ -77,9 +77,31 @@ export function checkLoginStatus(callback) {
   onAuthStateChanged(auth, callback);
 }
 
-// Add habit to Firestore
-export async function addHabitToFirebase(name) {
-  await addDoc(collection(db, "habits"), { name });
+// Add habit to Firebase (with user.uid)
+async function addHabitToFirebase(habitName, userId) {
+  const db = firebase.firestore();
+  await db.collection("habits").add({
+    name: habitName,
+    userId: userId, // Store userId with the habit
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  });
+}
+
+// Load habits for a specific user (filter by userId)
+async function loadHabits(userId) {
+  const db = firebase.firestore();
+  const snapshot = await db
+    .collection("habits")
+    .where("userId", "==", userId) // Only get habits that belong to this user
+    .get();
+
+  const habits = [];
+  snapshot.forEach((doc) => {
+    habits.push(doc.data());
+  });
+
+  // Display the habits (or update your UI as needed)
+  console.log(habits);
 }
 
 // **Real-time Listener for Habits**

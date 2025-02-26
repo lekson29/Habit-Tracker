@@ -33,6 +33,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Create a global removeHabit function
+window.removeHabit = function (habitId) {
+  removeHabitFromFirebase(habitId);
+  console.log("Habit removed with ID:", habitId);
+};
+
 // Sign in user
 export async function signIn(email, password) {
   try {

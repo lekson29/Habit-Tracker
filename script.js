@@ -95,3 +95,4 @@ checkLoginStatus((user) => {
     document.getElementById("habit-section").style.display = "none";
   }
 });
+

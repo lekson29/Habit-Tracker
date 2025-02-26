@@ -10,9 +10,9 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
   deleteDoc,
   doc,
+  onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // Firebase configuration
@@ -80,24 +80,26 @@ export function checkLoginStatus(callback) {
 // Add habit to Firestore
 export async function addHabitToFirebase(name) {
   await addDoc(collection(db, "habits"), { name });
-  loadHabits(); // Reload habits after adding
 }
 
-// Load habits from Firestore
-export async function loadHabits() {
-  const querySnapshot = await getDocs(collection(db, "habits"));
-  document.getElementById("habits").innerHTML = "";
-  querySnapshot.forEach((doc) => {
-    let li = document.createElement("li");
-    li.innerHTML = `${
-      doc.data().name
-    } <button onclick="removeHabitFromFirebase('${doc.id}')">❌</button>`;
-    document.getElementById("habits").appendChild(li);
+// **Real-time Listener for Habits**
+export function loadHabits() {
+  const habitsList = document.getElementById("habits");
+  habitsList.innerHTML = ""; // Clear list before rendering
+
+  onSnapshot(collection(db, "habits"), (snapshot) => {
+    habitsList.innerHTML = ""; // Clear list before adding new items
+    snapshot.forEach((doc) => {
+      let li = document.createElement("li");
+      li.innerHTML = `${
+        doc.data().name
+      } <button onclick="removeHabitFromFirebase('${doc.id}')">❌</button>`;
+      habitsList.appendChild(li);
+    });
   });
 }
 
 // Remove habit from Firestore
 export async function removeHabitFromFirebase(id) {
   await deleteDoc(doc(db, "habits", id));
-  loadHabits(); // Reload habits after deletion
 }

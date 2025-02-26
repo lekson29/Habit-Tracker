@@ -134,5 +134,10 @@ export async function loadHabits(userId, useRealTime = false) {
 
 // Remove habit from Firestore
 export async function removeHabitFromFirebase(id) {
-  await deleteDoc(doc(db, "habits", id));
+  try {
+    await deleteDoc(doc(db, "habits", id));
+    console.log("Habit removed successfully!");
+  } catch (error) {
+    console.error("Error removing habit:", error.message);
+  }
 }

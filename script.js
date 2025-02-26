@@ -5,6 +5,7 @@ import {
   checkLoginStatus,
   addHabitToFirebase,
   loadHabits,
+  removeHabitFromFirebase,
 } from "./firebase.js";
 
 // DOM elements

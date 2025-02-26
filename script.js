@@ -95,4 +95,4 @@ checkLoginStatus((user) => {
     document.getElementById("habit-section").style.display = "none";
   }
 });
-
+window.removeHabitFromFirebase = removeHabitFromFirebase;
